@@ -1,0 +1,13 @@
+The inputs that make midpoint_A to fail is if x is a large positive integer and y is a negative integer. The equation for midpoint_A is X + ((y-x)/2. 
+
+1111 1111 1111 1111 1111 1111 1111 1111  + 
+(1111 1111 1111 1111 1111 1111 1111 0110 - 1111 1111 1111 1111 1111 1111 1111 1111) / 2 
+=10111111111111111111111111111010
+
+
+What caused the overflow is the fact that y has to be inverted since its a negative. Subtracting a negative from a really large number, will result in a negative number. Since 
+1111 1111 1111 1111 1111 1111 1111 1111 is already the 32 bit int max, adding that to the result of (y-x) will overflow. 
+
+The inputs that make midpoint_B are two negative inputs. 
+This is due to the fact that the types x and y are unsigned, so a two's complement will be performed on the number which can cause overflow already. 
+1111 1111 1111 1111 1111 1111 1111 0110 + 1111 1111 1111 1111 1111 1111 1111 1011 is already greater than 1111 1111 1111 1111 1111 1111 1111 1111. 
