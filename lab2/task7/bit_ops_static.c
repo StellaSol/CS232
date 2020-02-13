@@ -8,9 +8,17 @@ void get_bits(unsigned x,
                  unsigned start,
                  unsigned end,
 		 unsigned * a) {
+    unsigned i;
+    for(i=start; i<=end;i++){
+        if(x==(x & ~(1<<i))){
+            a[i]=0;
+        }
+        else if(x==(x | (1<<i))){
+            a[i] = 1;
+        }
+        }
     
-   return;
-    // YOUR CODE HERE
+    
     // Returning NULL is a placeholder
     // get_bits receives an array a from caller and set a[i] = 1 when (i+start)-th bit
     // of x is 1, otherwise set a[i] = 0;
@@ -22,7 +30,15 @@ void set_bits(unsigned * x,
              unsigned start,
              unsigned end,
              unsigned *v) {
-    // YOUR CODE HERE
+    unsigned i;
+    for(i=start; i<=end;i++){
+        if(v[i] == 0){
+            *x = *x & ~(1<<i); // set bit i to 0
+        }
+        else{
+            *x = *x | (1<<i); // set bit i to 1
+        }
+    }
     // No return value
     // v points to an array of at least (end-start+1) unsigned integers.
     // if v[i] == 0, then set (i+start)-th bit of x zero, otherwise, set (i+start)-th bit of x one.
@@ -33,7 +49,10 @@ void set_bits(unsigned * x,
 void flip_bits(unsigned * x,
               unsigned start,
               unsigned end) {
-    // YOUR CODE HERE
+    unsigned i;
+    for(i=start;i<=end;i++){
+        *x = *x ^ (1 << i); //^ gets the opposite bit
+    }
 }
 
 
