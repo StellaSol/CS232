@@ -38,24 +38,51 @@ void readonly_vs_stack();
 int main(void) {
     printf("---------------------------------------------\n");	
     trace_pointers();
+    //42 42
+    //7 42
+    //8 7 8 8
+    //123 8 7 123 123
     printf("---------------------------------------------\n");	
     trace_structs_pointers();
+    //a=0 b=1
+    //a=2 b=1
+    //a=4 b=5
     printf("---------------------------------------------\n");	
     strlen_vs_sizeof();
+    //strlen(str):6 sizeof(str):7 sizeof(str2): 8 sizeof(s):8 size(*s)=1
     printf("---------------------------------------------\n");	
     pointer_math();
+    //a[3]=3 str[3]=l
+    //(a+3-a)=3
+    //(str+3-str)=3
     printf("---------------------------------------------\n");	
     pointer_casting();
+    //*i=1
     printf("---------------------------------------------\n");	
     byte_ordering();
+    //0xdeadbeef
     printf("---------------------------------------------\n");	
     simple_double_array();
+    //*(*(darray+2)+2) = 11
+    //  daray[2][2] = 11
     printf("---------------------------------------------\n");	
     string_double_array_pointer_array();
+    //str1: address of str1
+    //str2: address of str2
+    //strings: address of strings
+    //strings[0]: 'Go Pace!'
+    //strings[1]: 'Beat CUNY!'
+    //strings[2]: 'Crash SUNY!'
+    //strings[3]: 'Enjoy CS232!'
     printf("---------------------------------------------\n");	
     string_equal();
+    //Beat CUNY!
+    //s1: address == s2: address
+    //s3: address == s4: address (will have different addresses)
     printf("---------------------------------------------\n");	
     readonly_vs_stack();
+    //str1=this is a locust tree
+    //segmentation fault
 }
 
 // ----------------------------------------------------------------------------
