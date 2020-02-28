@@ -6,8 +6,19 @@ typedef struct node {
 } node_t;
 
 node_t * construct_3_strs() {
-    return NULL;//just to pass compiler, please edit as needed.
-}
+    node_t *x, *y, *z;
+    x = malloc(sizeof(node_t));
+    y = malloc(sizeof(node_t));
+    z = malloc(sizeof(node_t));
+    x->value="CS232";
+    y->value="is";
+    z->value="awesome";
+
+      x->next=y;
+      y->next=z;
+      z->next=x;
+    
+    return (void)(z),(void)(y),x;}
 
 //You can ignore the following code for testing
 int dump_all(node_t*);
