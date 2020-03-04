@@ -60,38 +60,70 @@ mystring_t also_bad_string_new() {
    RIGHT WAY */
 mystring_t *mystring_new() {
 	mystring_t *retval;
-	//YOUR CODE HERE
+    retval = (mystring_t *) malloc(sizeof(mystring_t));
+    if (retval == NULL){
+        perror("...");
+        return NULL;
+    }
+    
+    retval->size=1;
+    retval->data=(char *) malloc(sizeof(char));
+    if(retval->data==NULL){
+        perror("allocation failed\n");
+        return NULL;
+    }
+    retval->data[0]=0;
 	return retval;
 }
 
 /* Return the value at the specified location/component "loc" of the mystring */
 char mystring_get(mystring_t *s, size_t loc) {
-	//YOUR CODE HERE
-	return ' ';
+    if(loc>=0 && loc < s->size){
+        return s->data[loc];
+    }
+    else{
+        return 0;
+    }
 }
 
 /* Free up the memory allocated for the passed mystring.
    Remember, you need to free up ALL the memory that was allocated. */
 void mystring_delete(mystring_t *s) {
-	/* YOUR CODE HERE */
+    free(s->data);
+    free(s);
 }
 
 int mystring_get_len(mystring_t *s) {
-	/* YOUR CODE HERE */
+    return s->size;
 }
 
 char* mystring_get_data(mystring_t *s) {
-	/* YOUR CODE HERE*/
 	return s->data;
 }
 void mystring_cat(mystring_t *s, char *s2) {
-	/* YOUR CODE HERE*/
+    int i,j=0;
+    for (i = 0; s->data[i] != '\0'; i++) {
+        s->data[i] = s2[j];
+    }
 }
 
 /* Set a value in the mystring. If the extra memory allocation fails, call
    allocation_failed(). Unset space should be value of space */
 void mystring_set(mystring_t *s, size_t loc, char value) {
-	/* YOUR CODE HERE*/
+    if(loc>=0 && loc < s->size){
+        s->data[loc] = value;
+    }
+    else if(loc>0){
+        s->data = realloc(s->data, sizeof(char)* (loc+1));
+        int i;
+        for(i=s->size;i<loc+1;i++){
+            s->data[i]=0;
+        }
+        s->data[loc]=value;
+        s->size = loc+1;
+    }
+        else{
+            perror("...");
+        }
+    }
 
-	return;
-}
