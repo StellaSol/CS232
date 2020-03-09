@@ -35,6 +35,7 @@ int main(void)   {
     printf("Search 'My Heart Will Go On', node address %p\n", node);  // should be NULL
     
     slist_destroy(song_list);
-
+    free(song_list);
+    free(node);
     return 0;
 }

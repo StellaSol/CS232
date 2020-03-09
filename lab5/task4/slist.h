@@ -39,6 +39,7 @@
 struct slist {
   struct snode *front; // front node
   struct snode *back;  // back node
+  uint32_t counter;
 };
 
 /**
