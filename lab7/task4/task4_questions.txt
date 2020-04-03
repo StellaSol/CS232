@@ -1,4 +1,20 @@
 1.What instructions evaluate “a>6”?
+
+A: cmpl $6, -4(%ebp)
+
 2.What happens if we delete the “jmp” instruction?
+
+A: If the jmp instruction is deleted then the instruction in L2 is executed
+   regardless if the condition specified in the cmpl instruction is met or not.
+   This is essence renders the if statement useless and will result in a stack
+   overflow as the integer c is continuously incremented by 2.
+
 3.Can you rewrite the condition with “jg” in place of “jle”? Why or why not?
 
+A: Since jg is: jump if greater and jle is: jump if less than or equal, they cannot
+   be used interchangeably. This would result in a logic error within the assembly
+   code because for example if the memory address pointing to a location that holds
+   an integer less than 6 (like in our code) and jg was used instead jle then the
+   instruction within the if statement would have been executed instead of the
+   instruction within the else. Therefore resulting in the integer value of c 
+   being returned incorrectly.
