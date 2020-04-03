@@ -1,8 +1,19 @@
-1.What instruction is “int a, b, c, d;” converted to? 
+1.What instruction is “int a, b, c, d;” converted to?
+
+A: subl $16,%esp
 
 2.Does “int a, b, c, d;” shrink or grow the stack? How many bytes are allocated on stack for a, b, c, and d? Explain them using instruction from question 1.
 
+A: int a, b, c, d; grows the stack by 16 bytes.
+   On the stack, 4 bytes are allocated to a, b, c and d.
+   Since “int a, b, c, d;” is seen to grow the stack by 16 bytes, these 16 bytes are divided evenly by allocating 4 bytes to each of the declared integers (a, b, c and d).
+
 3.What instruction is “b=2;” converted to? How is the address of variable b formed in the instruction?
+
+A: movl $2,-8(%ebp).
+   The address of variable b is formed 8 bytes away from the start of the stack as it was the second integer to which a value was assigned ("a = 1;" being the first).
 
 4.Based on the instructions converted from four assignments, can we claim the declaration order determines the allocation order? For instance, a is declared before b, does it mean a is to be allocated before b on stack? Verify your theory by changing the declaration to “int a, c, b, d;”
 
+A: Declaration order does determine allocation order as can be verified when the declaration order is changed from "int a, b, c, d;" to "int a, c, b, d;".
+   Therefore, if a is declared before b, it means that a is to be allocated before b on the stack.
