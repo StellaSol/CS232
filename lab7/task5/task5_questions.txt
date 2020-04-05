@@ -1,3 +1,8 @@
 1.By searching the function name “strcmp” in the assembly text, what instruction calls strcmp?
-2.Where is the password “secret” stored?
 
+        A: call strcmp
+
+2.Where is the password “secret” stored?
+	
+	A: It is stored in $password where the memory addresses are:
+           .byte 0x73,0x65,0x63,0x72,0x65,0x74,0x0
