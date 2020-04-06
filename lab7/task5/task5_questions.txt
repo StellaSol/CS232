@@ -4,4 +4,8 @@
 
 2.Where is the password “secret” stored?
 	
-	A: It is stored within the code because it is a string literal constant.
+	A: pushl $password. 
+	$password is a label to the value, "secret", which is stored in the read only 		section. Specifically, it is stored in the section:
+	password:
+        	.byte 0x73,0x65,0x63,0x72,0x65,0x74,0x0
+	
