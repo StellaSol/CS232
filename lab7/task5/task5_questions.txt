@@ -4,5 +4,4 @@
 
 2.Where is the password “secret” stored?
 	
-	A: It is stored in $password where the memory addresses are:
-           .byte 0x73,0x65,0x63,0x72,0x65,0x74,0x0
+	A: It is stored within the code because it is a string literal constant.
