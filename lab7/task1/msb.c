@@ -12,8 +12,8 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 	int x=atoi(argv[1]);
-	printf("X= "); 
-	print_binary(x); 
+	printf("X= ");
+	print_binary(x);
 	printf("\n");
 	printf("The most significant bit of %d is at position %d\n",x,msb(x));
 	return 0;
@@ -29,20 +29,29 @@ int msb(int x) {
 	//                        ^
 	//                        |
 	//                        ep
-	// in which * is a wild card which could be 0 or 1                   
+	// in which * is a wild card which could be 0 or 1
 	int w, ep;
 	w=32; // Number of bits that might contain most significant 1
 	ep=0; // Rightmost bit that might contain most significant 1
 	while(w>1) { //Narrow down to a single bit
 		//TODO: Look at half the range of bits
-		//TODO: create a mask. 
+        int hw = w/2; //Since we have to look at half the range of bits, we have to keep dividing width by 2
+		//TODO: create a mask.
+        unsigned int mask = 0;
 		// This mask is all one-bits in the left half of the range
+        for(int bit_pos = hw+ep; bit_pos < ep+w; bit_pos++){
+            mask = mask | (1 << bit_pos); //setting 1 the bit position on each left half range
+        }
 		printf("M= "); print_binary(mask); printf(" hw=%d ep=%d\n",hw,ep);
-		//TODO: use mask to figure out if the left half of the range has at least one bit   
+		//TODO: use mask to figure out if the left half of the range has at least one bit
 		//If the left half of the range has a one bit, focus on only the left half
 		//else focus on only the right half
+        if(x&mask){ //checks if x has atleast one 1-bit
+            ep = ep+hw; //updatest the range of hw to ep. 
+        }
 		//TODO: You have ruled out either the left half of the range or the right half of the range
 		//set up ep and w accordingly
+        w = w/2; //divides width by 2 so 5 iterations
 	}
 	return ep;
 }
