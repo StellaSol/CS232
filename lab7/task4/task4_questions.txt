@@ -18,3 +18,6 @@ A: Since jg is: jump if greater and jle is: jump if less than or equal, they can
    instruction within the if statement would have been executed instead of the
    instruction within the else. Therefore resulting in the integer value of c 
    being returned incorrectly.
+
+JYM: it is possible to swap jg with jle as long as the two corresponding code blocks
+are swapped too.
