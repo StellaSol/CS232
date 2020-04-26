@@ -1,3 +1,14 @@
 #1: Explain the newly-added function mruUpdate(), briefly outlining its purpose, how it works, and why we would want or need such a function in our fully-associative cache simulator.
 
+    (i) The purpose of the function mruUpdate(), is to update the mru[] array when the tag is found and a hit is recorded in the cache.
+    (ii)The mruUpdate() function works by iterating through the mru[] array until the index is found at a given position
+    in the array. Following this, it sets the first index of the mru[] array to the value of the index as seen on line
+    18 of fully_assoc.c.
+    (iii)The reason we need the mruUpdate() function in our fully-associative cache simulation is because without it we would not be able
+    to store data in any cache block as per the guidelines of fully associative cache. Therefore, the mruUpdate() function allows for there
+    to never be a conflict between two or more memory addresses which map to a single cache block.
+
 #2: Compile and execute the fully-associative cache simulator in the task. Report the final number of hits and accesses output by the code. Based on the pattern of cache hits, estimate the hit rate of the given trace in the steady state (once the compulsory misses are accounted for).
+
+    (i) Hits = 76, Accesses = 103
+    (ii)Hit rate = 76 / (103-27) = 1 in the steady state.
