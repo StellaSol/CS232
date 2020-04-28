@@ -1,60 +1,60 @@
 Table for yi.trace when set index bits =4, block offset bit = 4 using direct map cache:
 
 ----------------------------------------------------------------
- trace	|Your analysis(miss/hit, set/index id)		    |csim-ref output
+ trace	|Your analysis(miss/hit, set/index id)		    													|csim-ref output
 ----------------------------------------------------------------   
- L 10,1	|0x10=0001 0000.Cache miss, set id=1 	            | 1 miss	 	 
- M 20,1	|0x20=0010 0000.Cache miss, set id=2	            | 1 miss hit	 	 
- L 22,1	|0x22=0010 0010.Cache hit, set id=2	     	    | 1 hit	 	 
- S 18,1	|0x18=0001 1000.Cache hit, set id=1		    | 1 hit
- L 110,1|0x110=0001 0001 0000. Cache miss eviction, set id=1| 1 miss eviction
- L 210,1|0x210=0010 0001 0000. Cache miss, set id=1	    | 1 miss eviction
- M 12,1	|0x12=0001 0010. Cache miss, set id=1.              | 1 miss eviction hit	 	 
+ L 10,1	|0x10=0001 0000. Offset takes 4 bits so the set id=0b0001. It is a cache miss since it wasn't in the cache and line is available, no eviction		| 1 miss	
+ M 20,1	|0x20=0010 0000. Offset takes 4 bits so the set id=0b0010. It is a cache miss since it wasn't in the cache and line is available, no eviction    	| 1 miss hit	 	 
+ L 22,1	|0x22=0010 0010. Offset takes 4 bits so the set id=0b0010. It is a cache hit, since it is in the cache due to 20. 					| 1 hit	 	 
+ S 18,1	|0x18=0001 1000. Offset takes 4 bits so the set id=0b0001. It is a cache hit, since it is in the cache due to 10. 					| 1 hit 
+ L 110,1|0x110=0001 0001 0000. Offset takes 4 bits so the set id=0b0001. It is a cache miss because line is taken by 10 and causes an eviction  		| 1 miss eviction
+ L 210,1|0x210=0010 0001 0000. Offset takes 4 bits so the set id=0b0001. It is a cache miss because line is taken by 110 and causes an eviction 		| 1 miss eviction
+ M 12,1	|0x12=0001 0010. Offset takes 4 bits so the set id=0b0001. It is a cache miss because line is taken by 210 and causes an eviction       		| 1 miss eviction hit	 	 
 -----------------------------------------------------------------
 
 Table for yi.trace when set index bits =4, block offset bit = 4 using 2 lines per set:
 ----------------------------------------------------------------
- trace	|Your analysis(miss/hit, set/index id)			|csim-ref output
+ trace	|Your analysis(miss/hit, set/index id)															|csim-ref output
 ---------------------------------------------------------------- 
- L 10,1	|0x10=0001 0000. Cache miss, set id=1			| 1 miss	 	 
- M 20,1	|0x20=0010 0000. Cache miss, set id=2			| 1 miss hit	 	 
- L 22,1	|0x22=0010 0010. Cache hit, set id=2			| 1 hit 	 	 
- S 18,1	|0x18=0001 1000. Cache hit, set id=1			| 1 hit	 	 
- L 110,1|0x110=0001 0001 0000. Cache miss eviction, set id=1	| 1 miss	 	 
- L 210,1|0x210=0010 0001 0000. Cache miss, set id=1		| 1 miss eviction	 	 
- M 12,1	|0x12=0001 0010. Cache miss, set id=1. 			| 1 miss eviction hit	 	 
+ L 10,1	|0x10=0001 0000. Offset takes 4 bits so the set id=0b0001. It is a cache miss since it wasn't in the cache and a line is available, no eviction 	| 1 miss	 	 
+ M 20,1	|0x20=0010 0000. Offset takes 4 bits so the set id=0b0010. It is a cache miss since it wasn't in the cache and a line is available, no eviction		| 1 miss hit	 	 
+ L 22,1	|0x22=0010 0010. Offset takes 4 bits so the set id=0b0010. It is a cache hit since it is in the cache due to 20. 					| 1 hit 	 	 
+ S 18,1	|0x18=0001 1000. Offset takes 4 bits so the set id=0b0001. It is a cache hit, since it is in the cache due to 10. 					| 1 hit	 	 
+ L 110,1|0x110=0001 0001 0000. Offset takes 4 bits so the set id=0b0001. It is a cache miss. 2 lines in set(one occupied by 10) and 1 is available, no eviction | 1 miss	 	 
+ L 210,1|0x210=0010 0001 0000. Offset takes 4 bits so the set id=0b0001. It is a cache miss. 2 lines are already occupied by 10 and 110 so it causes eviction	| 1 miss eviction	 	 
+ M 12,1	|0x12=0001 0010. Offset takes 4 bits so the set id=0b0001. It is a cache miss. 2 lines are already occupied by 210 and 110, cause eviction 		| 1 miss eviction hit	 	 
 ----------------------------------------------------------------
 
 Table for yi.trace when set index bits =4, block offset bit = 2 using direct map cache:
 -----------------------------------------------------------------
- trace	|Your analysis(miss/hit, set/index id)		|csim-ref output
+ trace	|Your analysis(miss/hit, set/index id)															|csim-ref output
 -----------------------------------------------------------------   
- L 10,1	|0x10=0001 0000. Cache miss, set id=4		| 1 miss	 	 
- M 20,1	|0x20=0010 0000. Cache miss, set id=8		| 1 miss hit	 	 
- L 22,1	|0x22=0010 0010.  Cache hit, set id=8		| 1 hit	 	 
- S 18,1	|0x18=0001 1000.  Cache miss, set id=6		| 1 miss	 	 
- L 110,1|0x110=0001 0001 0000.Cache miss, set id=4	| 1 miss eviction	 	 
- L 210,1|0x210=0010 0001 0000. Cache miss, set id=4	| 1 miss eviction	 	 
- M 12,1	|0x12=0001 0010. Cache miss, set id=4		| 1 miss eviction hit
+ L 10,1	|0x10=0001 0000. Offset takes 2 bits so the set id=0b0100. It is a cache miss since it wasn't in the cache and line is available, no eviction	 	| 1 miss	 	 
+ M 20,1	|0x20=0010 0000. Offset takes 2 bits so the set id=0b1000. It is a cache miss since it wasn't in the cache and line is available, no eviction		| 1 miss hit	 	 
+ L 22,1	|0x22=0010 0010. Offset takes 2 bits so the set id=0b1000. It is a cache hit since it is in the cache due to 20.					| 1 hit	 	 
+ S 18,1	|0x18=0001 1000. Offset takes 2 bits so the set id=0b0110. It is a cache miss since it wasn't in the cache and a line is available, no eviction		| 1 miss	 	 
+ L 110,1|0x110=0001 0001 0000.Offset takes 2 bits so the set id=0b0100. It is a cache miss because line is taken by 10 and causes an eviction		 	| 1 miss eviction	 	 
+ L 210,1|0x210=0010 0001 0000.Offset takes 2 bits so the set id=0b0100. It is a cache miss because line is taken by 110 and causes an eviction			| 1 miss eviction	 	 
+ M 12,1	|0x12=0001 0010. Offset takes 2 bits so the set id=0b0100. It is a cache miss because line is taken by 210 and causes an eviction			| 1 miss eviction hit
 -----------------------------------------------------------------	 	 
 Table for dave.trace when set index bits =4, block offset bit = 4 using direct map cache:
 -----------------------------------------------------------------
- trace	|Your analysis(miss/hit, set/index id)		|csim-ref output
+ trace	|Your analysis(miss/hit, set/index id)															|csim-ref output
 -----------------------------------------------------------------   
- L 10,4	|0x10=0001 0000. Cache miss, set id=1		| 4 miss	 	 
- S 18,4	|0x18=0001 1000. Cache hit, set id=1		| 4 hit	 	 
- L 20,4	|0x20=0010 0000. Cache miss, set id=2		| 4 miss	 	 
- S 28,4	|0x28=0010 1000. Cache hit, set id=2		| 4 hit	 	 
- S 50,4	|0x50=0101 0000. Cache miss, set id=5		| 4 miss	 	 
+ L 10,4	|0x10=0001 0000. Offset takes 4 bits so the set id=0b0001. It is a cache miss since it wasn't in the cache and line is available, no eviction  		| 4 miss	 	 
+ S 18,4	|0x18=0001 1000. Offset takes 4 bits so the set id=0b0001. It is a cache hit since it is in the cache due to 10. 			 		| 4 hit	 	 
+ L 20,4	|0x20=0010 0000. Offset takes 4 bits so the set id=0b0010. It is a cache miss since it wasn't in the cache and line is available, no eviction 		| 4 miss	 	 
+ S 28,4	|0x28=0010 1000. Offset takes 4 bits so the set id=0b0010. It is a cache hit since it is in the cache due to 20. 					| 4 hit	 	 
+ S 50,4	|0x50=0101 0000. Offset takes 4 bits so the set id=0b0101. It is a cache miss since it wasn't in the cache and line is available, no eviction		| 4 miss	 	 
 -----------------------------------------------------------------
 
 Table for dave.trace when set index bits =4, block offset bit = 2 using direct map cache:
 -----------------------------------------------------------------
- trace	|Your analysis(miss/hit, set/index id)		|csim-ref output
+ trace	|Your analysis(miss/hit, set/index id)															|csim-ref output
 -----------------------------------------------------------------   
- L 10,4	|0x10=0001 0000. Cache miss, set id= 4		| 4 miss	 	 
- S 18,4	|0x18=0001 1000. Cache miss, set id= 6		| 4 miss	 	 
- L 20,4	|0x20=0010 0000. Cache miss, set id= 8		| 4 miss	 	 
- S 28,4	|0x28=0010 1000. Cache miss, set id= 10		| 4 miss	 	 
- S 50,4	|0x50=0101 0000. Cache miss, set id= 4		| 4 miss eviction
+ L 10,4	|0x10=0001 0000. Offset takes 2 bits so the set id=0b0100. It is a cache miss since it wasn't in the cache and line is available, no eviction   	| 4 miss	 	 
+ S 18,4	|0x18=0001 1000. Offset takes 2 bits so the set id=0b0110. It is a cache miss since it wasn't in the cache and line is available, no eviction		| 4 miss	 	 
+ L 20,4	|0x20=0010 0000. Offset takes 2 bits so the set id=0b1000. It is a cache miss since it wasn't in the cache and line is available, no eviction		| 4 miss	 	 
+ S 28,4	|0x28=0010 1000. Offset takes 2 bits so the set id=0b1010. It is a cache miss since it wasn't in the cache and line is available, no eviction		| 4 miss	 	 
+ S 50,4	|0x50=0101 0000. Offset takes 2 bits so the set id=0b0100. It is a cache miss because line is taken by 10 and causes an eviction			| 4 miss eviction
 ----------------------------------------------------------------	 	 
