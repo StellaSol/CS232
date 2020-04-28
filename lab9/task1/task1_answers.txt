@@ -1,60 +1,60 @@
 Table for yi.trace when set index bits =4, block offset bit = 4 using direct map cache:
 
 ----------------------------------------------------------------
- trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
+ trace	|Your analysis(miss/hit, set/index id)		    |csim-ref output
 ----------------------------------------------------------------   
- L 10,1	|					|	 	 
- M 20,1	|					|	 	 
- L 22,1	|					|	 	 
- S 18,1	|	 	 			|
- L 110,1|	 	 			|
- L 210,1|	 	 			|
- M 12,1	|					|	 	 
+ L 10,1	|0x10=0001 0000.Cache miss, set id=1 	            | 1 miss	 	 
+ M 20,1	|0x20=0010 0000.Cache miss, set id=2	            | 1 miss hit	 	 
+ L 22,1	|0x22=0010 0010.Cache hit, set id=2	     	    | 1 hit	 	 
+ S 18,1	|0x18=0001 1000.Cache hit, set id=1		    | 1 hit
+ L 110,1|0x110=0001 0001 0000. Cache miss eviction, set id=1| 1 miss eviction
+ L 210,1|0x210=0010 0001 0000. Cache miss, set id=1	    | 1 miss eviction
+ M 12,1	|0x12=0001 0010. Cache miss, set id=1.              | 1 miss eviction hit	 	 
 -----------------------------------------------------------------
 
 Table for yi.trace when set index bits =4, block offset bit = 4 using 2 lines per set:
 ----------------------------------------------------------------
- trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
+ trace	|Your analysis(miss/hit, set/index id)			|csim-ref output
 ---------------------------------------------------------------- 
- L 10,1	|					|	 	 
- M 20,1	|					|	 	 
- L 22,1	|					|	 	 
- S 18,1	|					|	 	 
- L 110,1|					|	 	 
- L 210,1|					|	 	 
- M 12,1	|					|	 	 
+ L 10,1	|0x10=0001 0000. Cache miss, set id=1			| 1 miss	 	 
+ M 20,1	|0x20=0010 0000. Cache miss, set id=2			| 1 miss hit	 	 
+ L 22,1	|0x22=0010 0010. Cache hit, set id=2			| 1 hit 	 	 
+ S 18,1	|0x18=0001 1000. Cache hit, set id=1			| 1 hit	 	 
+ L 110,1|0x110=0001 0001 0000. Cache miss eviction, set id=1	| 1 miss	 	 
+ L 210,1|0x210=0010 0001 0000. Cache miss, set id=1		| 1 miss eviction	 	 
+ M 12,1	|0x12=0001 0010. Cache miss, set id=1. 			| 1 miss eviction hit	 	 
 ----------------------------------------------------------------
 
 Table for yi.trace when set index bits =4, block offset bit = 2 using direct map cache:
 -----------------------------------------------------------------
- trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
+ trace	|Your analysis(miss/hit, set/index id)		|csim-ref output
 -----------------------------------------------------------------   
- L 10,1	|					|	 	 
- M 20,1	|					|	 	 
- L 22,1	|					|	 	 
- S 18,1	|					|	 	 
- L 110,1|					|	 	 
- L 210,1|					|	 	 
- M 12,1	|					|
+ L 10,1	|0x10=0001 0000. Cache miss, set id=4		| 1 miss	 	 
+ M 20,1	|0x20=0010 0000. Cache miss, set id=8		| 1 miss hit	 	 
+ L 22,1	|0x22=0010 0010.  Cache hit, set id=8		| 1 hit	 	 
+ S 18,1	|0x18=0001 1000.  Cache miss, set id=6		| 1 miss	 	 
+ L 110,1|0x110=0001 0001 0000.Cache miss, set id=4	| 1 miss eviction	 	 
+ L 210,1|0x210=0010 0001 0000. Cache miss, set id=4	| 1 miss eviction	 	 
+ M 12,1	|0x12=0001 0010. Cache miss, set id=4		| 1 miss eviction hit
 -----------------------------------------------------------------	 	 
 Table for dave.trace when set index bits =4, block offset bit = 4 using direct map cache:
 -----------------------------------------------------------------
- trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
+ trace	|Your analysis(miss/hit, set/index id)		|csim-ref output
 -----------------------------------------------------------------   
- L 10,4	|					|	 	 
- S 18,4	|					|	 	 
- L 20,4	|					|	 	 
- S 28,4	|					|	 	 
- S 50,4	|					|	 	 
+ L 10,4	|0x10=0001 0000. Cache miss, set id=1		| 4 miss	 	 
+ S 18,4	|0x18=0001 1000. Cache hit, set id=1		| 4 hit	 	 
+ L 20,4	|0x20=0010 0000. Cache miss, set id=2		| 4 miss	 	 
+ S 28,4	|0x28=0010 1000. Cache hit, set id=2		| 4 hit	 	 
+ S 50,4	|0x50=0101 0000. Cache miss, set id=5		| 4 miss	 	 
 -----------------------------------------------------------------
 
 Table for dave.trace when set index bits =4, block offset bit = 2 using direct map cache:
 -----------------------------------------------------------------
- trace	|Your analysis(miss/hit, set/index id)	|csim-ref output
+ trace	|Your analysis(miss/hit, set/index id)		|csim-ref output
 -----------------------------------------------------------------   
- L 10,4	|					|	 	 
- S 18,4	|					|	 	 
- L 20,4	|					|	 	 
- S 28,4	|					|	 	 
- S 50,4	|					|
+ L 10,4	|0x10=0001 0000. Cache miss, set id= 4		| 4 miss	 	 
+ S 18,4	|0x18=0001 1000. Cache miss, set id= 6		| 4 miss	 	 
+ L 20,4	|0x20=0010 0000. Cache miss, set id= 8		| 4 miss	 	 
+ S 28,4	|0x28=0010 1000. Cache miss, set id= 10		| 4 miss	 	 
+ S 50,4	|0x50=0101 0000. Cache miss, set id= 4		| 4 miss eviction
 ----------------------------------------------------------------	 	 
