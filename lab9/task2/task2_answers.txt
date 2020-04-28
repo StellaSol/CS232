@@ -1,5 +1,11 @@
 #1: What function does the line i = (addr >> 2) & 7; serve in the simulation?
 
+	A:  The function obtains the tag bits from the address which helps distinguish between different memory locations that map to the same cache block. 
+
 #2: Compile and execute the direct-mapped cache simulator given in the task. Report the final number of hits and accesses output by the code. Also, based on the pattern of cache hits, estimate the hit rate of the given trace in the steady state (once the compulsory misses are accounted for).
 
-#3: Our implementation of a simple, direct-mapped cache simulator only uses and maintains the tags in its simulation. Why is this enough to get a working example of cache behavior?
+	A: Hits: 68, Accesses: 103 
+	   Hit Rate = 68 / (103-35) = 1
+
+#3: Our implementation of a simple, direct-mapped cache simulator only uses and maintains the tags in its simulation. Why is this enough to get a working example of cache behavior?	
+	A: Tags are needed because it allows the cache to translate from a cache address to a unique CPU address. This will enable a cache hit or miss, since the CPU tried and will match or not match with 	the cache block that was available in the cache. Also, the tags supply the rest of the address bits and helps distinguish between different memory locations that map to the same cache block. This 	will allow us to tell exactly which addresses of main memory are stored in the cache. 
