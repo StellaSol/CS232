@@ -1,6 +1,6 @@
 #include "syscall.h"
 #include "stdio.h"
-#define Dim 	2048
+#define Dim 	32
 
 int A[Dim][Dim];
 int B[Dim][Dim];
