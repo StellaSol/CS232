@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct{
   int * a; //array of ints
@@ -26,12 +27,13 @@ mytype_t ** allocate(int n){
   return mytypes;
 }
 
-void deallocate(mytype_t ** mytypes){
-      int i;
-      int n =strlen(mytypes);
-      for(i=0;i<n;i++){
-          free(mytypes[i]);
+void deallocate(mytype_t ** mytypes, int n){
+    int i;
+    for(i=0;i<n;i++){
+        free(mytypes[i]);
+        free(mytypes[i]->a);
     }
+    free(mytypes);
 }
 
 int main(){
@@ -49,5 +51,6 @@ int main(){
     printf(" ]\n");
   }
 
-  deallocate(mytypes);
+  deallocate(mytypes,10);
 }
+
