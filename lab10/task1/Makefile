@@ -1,6 +1,6 @@
 CC=gcc
 LD=gcc
-CFLAGS=-ggdb -Wall -pedantic -std=c11 -O3
+CFLAGS=-ggdb -Wall -pedantic -std=c11 -O0
 LDFLAGS=
 
 EX2_PROG=matrix_mul_ijk
