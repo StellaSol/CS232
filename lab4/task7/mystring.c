@@ -41,6 +41,7 @@ mystring_t *bad_string_new() {
 /* Another suboptimal way of creating a string */
 mystring_t also_bad_string_new() {
 	/* Create the string */
+    //
 	/*why is this bad? does v get destroyed upon returning? */
 	mystring_t s;
 
@@ -101,10 +102,18 @@ char* mystring_get_data(mystring_t *s) {
 	return s->data;
 }
 void mystring_cat(mystring_t *s, char *s2) {
-    int i,j=0;
-    for (i = 0; s->data[i] != '\0'; i++) {
-        s->data[i] = s2[j];
+    int i=0,j;
+    while(s->data[i]!= '\0'){ //gets the last index of the list before NULL
+        i++;
     }
+    
+    for(j=0; s2[j]!='\0'; j++, i++)
+    {
+       s->data[i]=s2[j];
+    }
+    s->data[i]='\0';
+
+    
 }
 
 /* Set a value in the mystring. If the extra memory allocation fails, call
