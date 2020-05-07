@@ -1,16 +1,25 @@
 1. Which order performs the worst? Why? Please write down the latency captured by time for the worst order.
+
+	A: The order that performed the worst was: JKI. The reason why this performed the worst because of its poor spatial locality. Due to the poor spatial locality, the program will not reference nearby memory locations as much. C stores array in row major order, but this order depends on column wise. As a result, the innermost loop shows a stride-N reference pattern.  JKI had the highest D1 miss rate of 16.6% when the matrix sizes were 1024, 512, 256, and 128. This miss rate is significantly larger than that of IJK and IKJ. The latency captured was 1m39.701s when the dim size is 2048. Higher miss rates can have an impact on running time, as seen in the latency captured by time. 
+
 2. Which order performs the best? Why? Please write down the latency captured by time for the best best.
+	A: The order that performed the best was: IKJ because it demonstrated the lowest miss rate in comparison to the other orders. IKJ has better spatial locality. Since C stores arrays in row major order, the inner loop has a stride-1 reference pattern. This suggests that we can expect that the cost of copying a block after a miss will be amortized by subsequent references to other objects within that block. It also had the lowest D1 miss rate which is around .5% for 1024, 512, 256, and 128. IKJ had the lowest latency captured by time, which was 0m45.491s when the dim size is 2048. This suggests that due to the good spatial locality, it was able to have better performance. 
+
 3. Does the way we stride through the matrices with respect to the innermost loop affect performance? 
+	A: The way we stride through the matrices with respect to the innermost loop does affect the performance. The smaller the stride, the better the spatial locality. Programs with stride-1 reference patterns are good because cache at all levels of the memory hierarchy store data in contiguous blocks. Programs with higher strides have to "jump" around memory which suggests poor spatial locality. Stride-n reference pattern is poor spatial quality because data are being accessed far apart from one another. The shorter the stride, the better the spatial locality. 
+
 4. Please complete the following table using valgrind to measure D1 miss rate with regard to different matrix size.
 ________________________________________________________________________________
 |Cache miss w.r.t matrix size	|1024	|512	|256	|128	|64	|32	|
 |-------------------------------------------------------------------------------|
-|matrix_mult_ijk		|	|	|	|	|	|	|
+|matrix_mult_ijk		|7.1%	|7.1%	|7.1%	|7.1%	|.2%	|.8%	|
 |-------------------------------------------------------------------------------|
-|matrix_mult_jki		|	|	|	|	|	|	|
+|matrix_mult_jki		|16.6%	|16.6%	|16.6%	|16.4%	|.6%	|.9%	|
 |-------------------------------------------------------------------------------|
-|matrix_mult_ikj		|	|	|	|	|	|	|
+|matrix_mult_ikj		|.5%	|.5%	|.5%	|.6%	|.2%	|.9%	|
 |_______________________________|_______|_______|_______|_______|_______|_______|
 	
 5. Based on the table of q4, does the size of the matrix affect performance? Why? Have you noticed the cache miss rate dramatically changes upon a certain dim size? What is the size of the matrix when it happens? and why would it happen? 
-
+	
+	A: Yes, the size does affect the performance. As seen above, as the dim size when down, the miss rate went down for all orders. A low miss rate can lead to a better performance of the program. Size affects performance because if the array is larger than the cache, then each access of C[I][j], A[I][k], B[k][j] will most likely miss. Another possibility of why this would happen is the fact that the input data is large and is a power of two, so there can be a lot conflict misses, especially if it is a direct mapped cache. The cache is large enough to hold reference data objects, but if the objects were mapped to the same block, it can lead to a conflict miss. 
+	I noticed that the cache miss rate dramatically changes upon a certain dim size. From 128 to 64, the miss rate drops significantly for all orders. For IJK, it went from 7.1% to .2%. For JKI, it went from 16.4% to .6%. For IKJ, it went from .6% to .2%. This would happen because since the size is not as big,  each access of C[I][j], A[I][k], B[k][j] will most likely hit. Also, the dim sizes 128,256,512,1024 suggest that due to the large size, the cache is not big enough to hold every block and can lead to a capacity miss.
