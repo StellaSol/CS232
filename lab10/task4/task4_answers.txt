@@ -1,19 +1,37 @@
-X = 5
-Y = 9
+X = 9
+Y = 5
 
 Convert X and Y to 16-bit binaries
+X= 0000 0000 0000 1001
+Y= 0000 0000 0000 0101
+
+The control bit flags that were on and showed X-Y was NX, F, and NO. NX inverts the bits of x. 
+Since F is on, it will add X+Y. NO will invert the bits of the result. 
+
+NX: !X 		 = 0b 1111 1111 1111 0110	= 0xfff6	
+
+
+F: X+Y		 = 0b 1111 1111 1111 0110
+		+  0b 0000 0000 0000 0101
+		 = 0b 1111 1111 1111 1011	= 0xfffb
+
+
+NO:!(X+Y) 	 = 0b 0000 0000 0000 0100	= 0x4
+
+
+
 ----------------------------------------
 |	  | output_X	| output_Y	|	
 -----------------------------------------
-|after	zx|		|  		|
+|after	zx| 0x9	 	| 0x4		|
 |---------|-------------|---------------|
-|after  nx|             |               |
+|after  nx| 0xfff6      | 0x4           |Inverts X but not Y
 |---------|-------------|---------------|
-|after  zy|             |              	|
+|after  zy| 0xfff6      | 0x4           |
 |-----------------------|---------------|
-|after  ny|             |               |
+|after  ny| 0xfff6      | 0x4           |
 |---------------------------------------|
-|after   f|                             |
+|after   f| 0xfff6      | 0x4           | Will Result in 0b 1111 1111 1111 1011 or 0xfffb	
 |---------------------------------------|
-|after  no|                             |
+|after  no| 0xfff6      | 0x4           | Final Output: 0b 0000 0000 0000 0100 or 0x4
 ----------------------------------------- 
