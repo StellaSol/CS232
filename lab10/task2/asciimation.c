@@ -43,22 +43,25 @@ asciimation_t * asciimation_new(char * path, int fps){
 	//figure out how many frames are in the dir?
 	int n = get_num_frames(path);
 	//create a list of frames
-	ascm->frames = //TODO: create a new slist;
-	// we know the number of frames, we can simply reconstruct the name of each ascii file, and construct a frame obj for 
+
+	ascm->frames = slist_create(); //TODO: create a new slist;
+	// we know the number of frames, we can simply reconstruct the name of each ascii file, and construct a frame obj for
 	// each ascii file. Must implement frame_new first
 	for(int i=0; i<n; i++) {
 		char asciipath[4096];
 		strcpy(asciipath, path);
 		int len = strlen(asciipath);
-		if(asciipath[len-1] != '/') 
+		if(asciipath[len-1] != '/')
 			sprintf(asciipath+len, "/%d", i+1);
-		else	
+		else
 			sprintf(asciipath+len, "%d", i+1);
 		//if your path is ./data/a, and i=0, then asciipath = ./data/a/1, exactly what we want to load
 		struct frame_t * aframe = frame_new(asciipath,i);
 		//TODO:add aframe to ascm->frames;
+
+		slist_add_back(ascm->frames, aframe);
 	}
-	
+
 	return ascm;
 }
 
@@ -68,20 +71,24 @@ void asciimation_delete(asciimation_t * ascm){
 	// 1. free all the frames, must implement frame_delete first.(why?)
 	// 2. free the list
 	// 3. free the ascm itself
+
+	// frame_delete(slist_get_front(ascm));
+	// free(aframe);
+	// free(ascm->frames);
+	// free(ascm);
+
 }
 
 void asciimation_play(asciimation_t * ascm){
 	//TODO:your code here
 	//loop through the list of frames and print out each frame, ? is also to be done by you
-	//for(int i=0; i<?; i++) {
-		//printf(?);
-		//sleep for frames_per_second * repetition_counter_of_the_frame
-		//clear the screen
-	//}
-}
+	//for(int i=0; i<slist_length(ascm->frames); i++) {
+		slist_traverse(ascm->frames);
+
+	}
+
 void asciimation_reverse(asciimation_t * ascm){
 	//TODO:Your code here
 	//same logic as above, only difference is loop through the list backward.
+
 }
-
-

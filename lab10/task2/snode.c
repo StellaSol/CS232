@@ -4,20 +4,20 @@
 #include <stdlib.h>
 
 typedef struct snode {
-  frame * str;
+  void * data;
   struct snode *next;
 }snode_s;
 
-struct snode *snode_create(frame *s)
+struct snode *snode_create(void *data)
 {
  //TODO: implement snode_create, change the prototype to
  //match with header file
  //return node;
  snode_s * Node = (struct snode*) calloc(1,sizeof(struct snode));
 
- Node->str = (frame *) malloc ((strlen(s) + 1) * sizeof (char));
+ Node->data = (frame_t *) malloc (sizeof (frame_t));
 
- strcpy(Node->str, s);
+ Node->data = data;
  Node->next = NULL;
 
  return Node;
@@ -26,7 +26,7 @@ struct snode *snode_create(frame *s)
 void snode_destroy(struct snode * s)
 {
  //TODO: implement snode_destroy
-free(s->str);
+free(s->data);
 free(s);
 };
 
@@ -40,10 +40,10 @@ snode_s *snode_get_next(snode_s *Node){
   return Node->next;
 }
 
-frame *snode_get_str(struct snode *Node){
-  return Node->str;
+void *snode_get_str(struct snode *Node){
+  return Node->data;
 }
 
-void snode_set_str(struct snode *Node, frame * str){
-  Node->str = str;
+void snode_set_str(struct snode *Node, char * str){
+  Node->data = str;
 }

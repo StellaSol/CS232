@@ -52,7 +52,7 @@ struct slist *slist_create();
  * @param str pointer to a C string to store in new list node
  * returns a pointer to the newly added node
  */
-struct snode* slist_add_back(struct slist *l, char *str);
+struct snode* slist_add_back(struct slist *l, void *data);
 
 /**
  * Inserts new node in slist before the first node.
@@ -106,8 +106,6 @@ struct snode * slist_get_front(struct slist *);
 struct snode * slist_get_back(struct slist *);
 
 struct snode *slist_find_at(struct slist *, int);
-
-void slist_delete_at(struct slist *, int);
 
 
 #endif /* _slist_H_ */

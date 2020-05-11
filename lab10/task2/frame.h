@@ -18,4 +18,5 @@ void frame_delete(struct frame_t * f);
 char* frame_get_content (struct frame_t *f);
 int frame_get_rep_counter(struct frame_t * f);
 int frame_get_id(struct frame_t *f);
+void mystring_cat(char *v, char * str);
 #endif
