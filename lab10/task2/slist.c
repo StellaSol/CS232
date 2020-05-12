@@ -169,6 +169,68 @@ void slist_traverse(struct slist *l){                           //FINISHED (POSS
 
 }
 
+void slist_reverse(struct slist *l){
+   snode_s * prev = NULL;
+   snode_s * current = l->front;
+   snode_s * next = NULL;
+
+  while(current != NULL) {
+    next = snode_get_next(current);
+
+    snode_set_next(current, prev);
+
+    prev = current ;
+    current = next;
+  }
+
+  l->front = prev;
+}
+
+// void slist_reverse (struct slist *l){
+//   int j =0;
+//   snode_s * current = l->front;
+//   while(current!=NULL){
+//     for(int i=0; i<2 *(slist_length(current)-j); i++){
+//       printf("%s\n", frame_get_content(snode_get_str(current)));
+//     }
+//     j++;
+//     sleep(1);
+//     system("@cls||clear");
+//   }
+// }
+
+// void slist_reverse(struct slist *l){
+//   snode_s *result = NULL;
+//   snode_s *current= l->front;
+//
+//   while (current != NULL){
+//     result = snode_get_next(current);
+//     result = current;
+//
+//     snode_set_next(result, snode_get_next(current));
+//     printf("%s\n", frame_get_content(snode_get_str((result))));
+//     current = snode_get_next(result);
+//
+//     sleep(1);
+//     system("@cls||clear");
+//
+//   }
+//
+//  //*l = result;
+// }
+
+// void slist_reverse(struct slist *l){
+//   snode_s *temp= l->front;
+//   for(int i=8; i>slist_length(l); i--) {
+//     temp = snode_get_next(temp);
+//     printf("%s\n", frame_get_content(snode_get_str((temp))));
+//
+//
+//   sleep(1);
+//   system("@cls||clear");
+// }
+// }
+
 /**
  * Returns the number of elements in the list (nodes).
  *

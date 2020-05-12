@@ -86,6 +86,8 @@ void slist_destroy(struct slist *l);
  */
 void slist_traverse(struct slist *l);
 
+void slist_reverse(struct slist *l);
+
 /**
  * Returns the number of elements in the list (nodes).
  *

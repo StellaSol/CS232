@@ -71,12 +71,13 @@ void asciimation_delete(asciimation_t * ascm){
 	// 1. free all the frames, must implement frame_delete first.(why?)
 	// 2. free the list
 	// 3. free the ascm itself
-
-	// frame_delete(slist_get_front(ascm));
-	// free(aframe);
-	// free(ascm->frames);
-	// free(ascm);
-
+	snode_s * bframe = slist_get_front(ascm->frames);
+	while (bframe) {
+		frame_delete(snode_get_str(bframe));
+		bframe = snode_get_next(bframe);
+	}
+	free(ascm->frames);
+	free(ascm);
 }
 
 void asciimation_play(asciimation_t * ascm){
@@ -85,10 +86,12 @@ void asciimation_play(asciimation_t * ascm){
 	//for(int i=0; i<slist_length(ascm->frames); i++) {
 		slist_traverse(ascm->frames);
 
+
 	}
 
 void asciimation_reverse(asciimation_t * ascm){
 	//TODO:Your code here
 	//same logic as above, only difference is loop through the list backward.
-
+		slist_reverse(ascm->frames);
+		slist_traverse(ascm->frames);
 }
