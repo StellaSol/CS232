@@ -27,7 +27,7 @@ void get_valid_option(int *n) {
 
 int main() {
 	int option;
-		
+
 	char path[4096];
 	int fps;
 
@@ -71,5 +71,5 @@ int main() {
 		printf("[press any key to continue]\n");
 		system("@cls||clear");
 	} while (1);
-	
+
 }
